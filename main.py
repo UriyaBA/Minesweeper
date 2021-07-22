@@ -34,7 +34,7 @@ while running:
                 m.right_clicked(clicked_tile)
 
     pygame.display.set_caption(
-        "Total mines: " + str(m.MINES) + " | Remaining flags: " + str(m.remaining_flags))
+        f"Total mines: {str(m.MINES)} | Remaining flags: {str(m.remaining_flags)}")
     m.draw()
     pygame.display.flip()
 
