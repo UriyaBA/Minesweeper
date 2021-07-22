@@ -51,9 +51,9 @@ class Tile:
         # Assign background color
         if(not self.revealed):
             color = Tile.COLOR_UNREVEALED
-        elif(self.revealed and self.danger == 0):
+        elif(self.danger == 0):
             color = Tile.COLORS_DANGER[0]
-        elif(self.revealed and self.danger != 9):
+        elif(self.danger != 9):
             color = Tile.COLOR_REVEALED
         elif(self.flagged):
             color = Tile.COLOR_UNREVEALED
