@@ -65,15 +65,15 @@ class Minefield:
         for i in range(Minefield.MINES):
             k = random.randint(0, len(self.coords)-1)
             r, c = self.coords.pop(k)
-            self.tiles[r][c].danger = 9
+            self.tiles[r][c].danger = Tile.MINE_DANGER
 
         # Assigning danger levels
         for i in range(0, Minefield.N):
             for j in range(0, Minefield.N):
                 currentTile = self.tiles[i][j]
-                if(currentTile.danger != 9):
+                if(currentTile.danger != Tile.MINE_DANGER):
                     for t in currentTile.valid_neighbors:
-                        if(t.danger == 9):
+                        if(t.danger == Tile.MINE_DANGER):
                             currentTile.danger += 1
         clicked_tile.danger = 0
 
@@ -82,7 +82,7 @@ class Minefield:
         for i in range(Minefield.N):
             for j in range(Minefield.N):
                 t = self.tiles[i][j]
-                if(t.danger == 9 and not t.flagged):
+                if(t.danger == Tile.MINE_DANGER and not t.flagged):
                     return False
         return True
 
@@ -90,13 +90,13 @@ class Minefield:
         for i in range(0, Minefield.N):
             for j in range(0, Minefield.N):
                 t = self.tiles[i][j]
-                if(t.danger == 9):
+                if(t.danger == Tile.MINE_DANGER):
                     t.revealed = True
 
     def reveal_cascade(self, centralTile):
 
         # Return if current tile is a revealed tile, mine tile, or a flagged tile
-        if(centralTile.revealed or centralTile.flagged or centralTile.danger == 9):
+        if(centralTile.revealed or centralTile.flagged or centralTile.danger == Tile.MINE_DANGER):
             return
 
         # If current tile is an unrevealed non lethal tile, reveal it
@@ -125,7 +125,7 @@ class Minefield:
             return
 
         # If player clicked on an unrevealed mine
-        if(clicked_tile.danger == 9):
+        if(clicked_tile.danger == Tile.MINE_DANGER):
             mixer.music.load('sfx/lose.wav')
             mixer.music.play()
             self.reveal_all_mines()

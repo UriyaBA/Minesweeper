@@ -8,6 +8,8 @@ class Tile:
     COLOR_REVEALED = (193, 192, 193)
     COLOR_REVEALED_MINE = (255, 192, 193)
 
+    MINE_DANGER = 9
+
     # Load danger colors from external json file
     f = open('json/colors_danger.json')
     data = json.load(f)
@@ -37,7 +39,7 @@ class Tile:
 
     def draw_danger(self):
 
-        if(self.danger == 9):
+        if(self.danger == Tile.MINE_DANGER):
             return
 
         pygame.font.init()
@@ -53,7 +55,7 @@ class Tile:
             color = Tile.COLOR_UNREVEALED
         elif(self.danger == 0):
             color = Tile.COLORS_DANGER[0]
-        elif(self.danger != 9):
+        elif(self.danger != Tile.MINE_DANGER):
             color = Tile.COLOR_REVEALED
         elif(self.flagged):
             color = Tile.COLOR_UNREVEALED
@@ -67,5 +69,5 @@ class Tile:
 
         if(self.flagged):
             self.draw_sprite(Tile.SPR_FLAG)
-        elif(self.danger == 9 and self.revealed):
+        elif(self.danger == Tile.MINE_DANGER and self.revealed):
             self.draw_sprite(Tile.SPR_MINE)
