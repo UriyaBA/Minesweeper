@@ -1,9 +1,10 @@
 import random
+from drawable import Drawable
 from pygame import mixer
 from tile import *
 
 
-class Minefield:
+class Minefield(Drawable):
 
     WINDOW_DIM = 800
     N = 16

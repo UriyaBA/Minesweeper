@@ -1,8 +1,9 @@
+from drawable import Drawable
 import json
 import pygame
 
 
-class Tile:
+class Tile(Drawable):
 
     COLOR_UNREVEALED = (193, 192, 193)
     COLOR_REVEALED = (193, 192, 193)
