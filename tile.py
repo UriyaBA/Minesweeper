@@ -11,8 +11,8 @@ class Tile:
     MINE_DANGER = 9
 
     # Load danger colors from external json file
-    f = open('json/colors_danger.json')
-    data = json.load(f)
+    with open('json/colors_danger.json', 'r') as f:
+        data = json.load(f)
 
     COLORS_DANGER = data['colors']
     SPR_FLAG = pygame.image.load("sprites/flag.png")
