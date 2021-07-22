@@ -4,8 +4,8 @@ from minefield import *
 pygame.init()
 mixer.init()
 
-screen = pygame.display.set_mode([Minefield.WINDOW_DIM, Minefield.WINDOW_DIM])
-pygame.display.set_icon(Tile.SPR_MINE)
+screen = pygame.display.set_mode([Minefield.WINDOW_SIZE, Minefield.WINDOW_SIZE])
+pygame.display.set_icon(Tile.SPRITE_MINE)
 
 m = Minefield(screen)
 m.init_field()
@@ -24,7 +24,7 @@ while running:
         if(event.type == pygame.MOUSEBUTTONUP and not m.game_end):
 
             x, y = pygame.mouse.get_pos()
-            norm_x, norm_y = y//Minefield.R, x//Minefield.R
+            norm_x, norm_y = y//Minefield.TILE_SIZE, x//Minefield.TILE_SIZE
 
             clicked_tile = m.tiles[norm_x][norm_y]
 
@@ -34,7 +34,7 @@ while running:
                 m.right_clicked(clicked_tile)
 
     pygame.display.set_caption(
-        f"Total mines: {str(m.MINES)} | Remaining flags: {str(m.remaining_flags)}")
+        f"Total mines: {str(m.TOTAL_MINES)} | Remaining flags: {str(m.remaining_flags)}")
     m.draw()
     pygame.display.flip()
 
