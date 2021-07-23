@@ -1,5 +1,7 @@
 import pygame
-from minefield import *
+from pygame import mixer
+from minefield import Minefield
+from tile import Tile
 
 pygame.init()
 mixer.init()

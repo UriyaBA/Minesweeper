@@ -1,6 +1,6 @@
-from drawable import Drawable
 import json
 import pygame
+from drawable import Drawable
 
 
 class Tile(Drawable):
