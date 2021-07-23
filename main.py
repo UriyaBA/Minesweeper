@@ -3,41 +3,48 @@ from pygame import mixer
 from minefield import Minefield
 from tile import Tile
 
-pygame.init()
-mixer.init()
 
-screen = pygame.display.set_mode([Minefield.WINDOW_SIZE, Minefield.WINDOW_SIZE])
-pygame.display.set_icon(Tile.SPRITE_MINE)
+def main():
+    pygame.init()
+    mixer.init()
 
-m = Minefield(screen)
-m.init_field()
+    screen = pygame.display.set_mode(
+        [Minefield.WINDOW_SIZE, Minefield.WINDOW_SIZE])
+    pygame.display.set_icon(Tile.SPRITE_MINE)
 
-running = True
+    m = Minefield(screen)
+    m.init_field()
 
-while running:
+    running = True
 
-    ev = pygame.event.get()
+    while running:
 
-    for event in ev:
-        if(event.type == pygame.QUIT):
-            running = False
+        ev = pygame.event.get()
 
-        # Handling mouse presses
-        if(event.type == pygame.MOUSEBUTTONUP and not m.game_end):
+        for event in ev:
+            if(event.type == pygame.QUIT):
+                running = False
 
-            x, y = pygame.mouse.get_pos()
-            norm_x, norm_y = y//Minefield.TILE_SIZE, x//Minefield.TILE_SIZE
+            # Handling mouse presses
+            if(event.type == pygame.MOUSEBUTTONUP and not m.game_end):
 
-            clicked_tile = m.tiles[norm_x][norm_y]
+                x, y = pygame.mouse.get_pos()
+                norm_x, norm_y = y//Minefield.TILE_SIZE, x//Minefield.TILE_SIZE
 
-            if(event.button == 1):
-                m.left_clicked(clicked_tile)
-            elif(event.button == 3):
-                m.right_clicked(clicked_tile)
+                clicked_tile = m.tiles[norm_x][norm_y]
 
-    pygame.display.set_caption(
-        f"Total mines: {str(m.TOTAL_MINES)} | Remaining flags: {str(m.remaining_flags)}")
-    m.draw()
-    pygame.display.flip()
+                if(event.button == 1):
+                    m.left_clicked(clicked_tile)
+                elif(event.button == 3):
+                    m.right_clicked(clicked_tile)
 
-pygame.quit()
+        pygame.display.set_caption(
+            f"Total mines: {str(m.TOTAL_MINES)} | Remaining flags: {str(m.remaining_flags)}")
+        m.draw()
+        pygame.display.flip()
+
+    pygame.quit()
+
+
+if (__name__ == "__main__"):
+    main()
